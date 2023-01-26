@@ -7,144 +7,488 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  '/users/{userId}':
-    parameters:
-      - schema:
-          type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
+  '/cms/node/format/{format_type}':
     get:
-      summary: Get User Info by User ID
+      summary: ノードフォーマット取得
       tags: []
       responses:
         '200':
-          description: User Found
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                x-examples:
+                  Example 1:
+                    career:
+                      logic_name: キャリアシート
+                      biz_type:
+                        logic_name: 業種
+                        valid:
+                          - require
+                          - unique
+                      overview:
+                        logic_name: プロジェクト概要
+                        valid:
+                          - require
+                          - unique
+                      detail:
+                        logic_name: 担当業務詳細
+                        valid:
+                          - require
+                          - unique
+                      term_start:
+                        logic_name: 期間開始
+                        valid:
+                          - require
+                          - unique
+                          - format_YYYYMMDD
+                      term_end:
+                        logic_name: 期間終了
+                        valid:
+                          - unique
+                          - format_YYYYMMDD
+                      role:
+                        logic_name: 役割
+                        valid:
+                          - require
+                          - any
+                      phase:
+                        logic_name: 工程
+                        valid:
+                          - require
+                          - any
+                      scale:
+                        logic_name: 規模
+                        valid:
+                          - unique
+                      tech:
+                        logic_name: 技術
+                        infra:
+                          logic_name: インフラ
+                          valid:
+                            - require
+                            - any
+                        middle:
+                          logic_name: ミドル
+                          valid:
+                            - require
+                            - any
+                        strage:
+                          logic_name: ストレージ
+                          valid:
+                            - require
+                            - any
+                        lang:
+                          logic_name: 言語
+                          valid:
+                            - require
+                            - any
+                        other:
+                          logic_name: その他
+                          valid:
+                            - any
+                properties:
+                  career:
+                    type: object
+                    properties:
+                      logic_name:
+                        type: string
+                      biz_type:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      overview:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      detail:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      term_start:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      term_end:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      role:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      phase:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      scale:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type: array
+                            items:
+                              type: string
+                      tech:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          infra:
+                            type: object
+                            properties:
+                              logic_name:
+                                type: string
+                              valid:
+                                type: array
+                                items:
+                                  type: string
+                          middle:
+                            type: object
+                            properties:
+                              logic_name:
+                                type: string
+                              valid:
+                                type: array
+                                items:
+                                  type: string
+                          strage:
+                            type: object
+                            properties:
+                              logic_name:
+                                type: string
+                              valid:
+                                type: array
+                                items:
+                                  type: string
+                          lang:
+                            type: object
+                            properties:
+                              logic_name:
+                                type: string
+                              valid:
+                                type: array
+                                items:
+                                  type: string
+                          other:
+                            type: object
+                            properties:
+                              logic_name:
+                                type: string
+                              valid:
+                                type: array
+                                items:
+                                  type: string
+                  profile:
+                    type: object
+                    properties:
+                      logic_name:
+                        type: string
+                      md:
+                        type: object
+                        properties:
+                          logic_name:
+                            type: string
+                          valid:
+                            type:
+                              - array
+                              - 'null'
+                            items:
+                              type: string
               examples:
-                Get User Alice Smith:
+                career:
                   value:
-                    id: 142
-                    firstName: Alice
-                    lastName: Smith
-                    email: alice.smith@gmail.com
-                    dateOfBirth: '1997-10-31'
-                    emailVerified: true
-                    signUpDate: '2019-08-24'
+                    career:
+                      logic_name: キャリアシート
+                      biz_type:
+                        logic_name: 業種
+                        valid:
+                          - require
+                          - unique
+                      overview:
+                        logic_name: プロジェクト概要
+                        valid:
+                          - require
+                          - unique
+                      detail:
+                        logic_name: 担当業務詳細
+                        valid:
+                          - require
+                          - unique
+                      term_start:
+                        logic_name: 期間開始
+                        valid:
+                          - require
+                          - unique
+                          - format_YYYYMMDD
+                      term_end:
+                        logic_name: 期間終了
+                        valid:
+                          - unique
+                          - format_YYYYMMDD
+                      role:
+                        logic_name: 役割
+                        valid:
+                          - require
+                          - any
+                      phase:
+                        logic_name: 工程
+                        valid:
+                          - require
+                          - any
+                      scale:
+                        logic_name: 規模
+                        valid:
+                          - unique
+                      tech:
+                        logic_name: 技術
+                        infra:
+                          logic_name: インフラ
+                          valid:
+                            - require
+                            - any
+                        middle:
+                          logic_name: ミドル
+                          valid:
+                            - require
+                            - any
+                        strage:
+                          logic_name: ストレージ
+                          valid:
+                            - require
+                            - any
+                        lang:
+                          logic_name: 言語
+                          valid:
+                            - require
+                            - any
+                        other:
+                          logic_name: その他
+                          valid:
+                            - any
+                profile:
+                  value:
+                    profile:
+                      logic_name: プロフィール
+                      md:
+                        logic_name: md
+                        valid:
+                          - require
+                          - unique
+                          - blob
+        '401':
+          description: Unauthorized
         '404':
-          description: User Not Found
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
+          description: 指定ノードフォーマットが見つからない
+        '500':
+          description: Internal Server Error
+      operationId: get-cms-node-format
+      description: 指定形式タイプに紐づくノードフォーマットを取得する。
+    parameters:
+      - schema:
+          type: string
+        name: format_type
+        in: path
+        description: '形式タイプ（1:キャリアシート、2:プロフィール）'
+  /cms/node/list:
+    get:
+      summary: ノード一覧取得
+      tags: []
       responses:
         '200':
-          description: User Updated
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                properties:
+                  node_list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        node_id:
+                          type: string
+                        prent_node_id:
+                          type: string
+                        key:
+                          type: string
+                        value:
+                          type: string
+                        blob_flg:
+                          type: string
+                        up_dt:
+                          type: string
+                        rg_dt:
+                          type: string
+                        version:
+                          type: number
+                        format_type:
+                          type: integer
+                        viewable_flg:
+                          type: boolean
+                        sort_order:
+                          type: integer
+                      required:
+                        - node_id
+                        - prent_node_id
+                        - key
+                        - value
+                        - blob_flg
+                        - up_dt
+                        - rg_dt
+                        - version
               examples:
-                Updated User Rebecca Baker:
+                Example 1:
                   value:
-                    id: 13
-                    firstName: Rebecca
-                    lastName: Baker
-                    email: rebecca@gmail.com
-                    dateOfBirth: '1985-10-02'
-                    emailVerified: false
-                    createDate: '2019-08-24'
-        '404':
-          description: User Not Found
-        '409':
-          description: Email Already Taken
-      description: Update the information of an existing user.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                  description: 'If a new email is given, the user''s email verified property will be set to false.'
-                dateOfBirth:
-                  type: string
-            examples:
-              Update First Name:
-                value:
-                  firstName: Rebecca
-              Update Email:
-                value:
-                  email: rebecca@gmail.com
-              Update Last Name & Date of Birth:
-                value:
-                  lastName: Baker
-                  dateOfBirth: '1985-10-02'
-        description: Patch user properties to update.
-  /user:
-    post:
-      summary: Create New User
-      operationId: post-user
+                    node_list:
+                      - node_id: string
+                        prent_node_id: string
+                        key: string
+                        value: string
+                        blob_flg: string
+                        up_dt: string
+                        rg_dt: string
+                        version: 0
+                        format_type: 0
+                        viewable_flg: true
+                        sort_order: 0
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-cms-node-list
+      description: |-
+        - ページノードと子ノード、ノードフォーマットをまたいですべてのノードの一覧を取得する。
+        - ページノード単位でノード一覧を取得する。
+        - 子ノードの表示順序は親-子-孫、親-子-孫の順とする。
+
+        ~~~ ツリー状の見た目
+         ROOT 
+         　L親１
+         　　L子１
+         　　　L孫１
+         　L親２
+         　　L子２
+        ~~~
+
+        ~~~ 本APIの取得イメージ
+         ROOT 
+         親１
+         子１
+         孫１
+         親２
+         子２
+        ~~~
+  '/cms/node/{node_id}':
+    get:
+      summary: ノード詳細取得
+      tags: []
       responses:
         '200':
-          description: User Created
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              examples:
-                New User Bob Fellow:
+                type: object
+                x-examples:
+                  Example 1:
+                    node_id: string
+                    prent_node_id: string
+                    key: string
+                    value: string
+                    blob_flg: string
+                    up_dt: string
+                    rg_dt: string
+                    version: 0
+                    format_type: 0
+                    viewable_flg: true
+                    sort_order: 0
+                properties:
+                  node_id:
+                    type: string
+                  prent_node_id:
+                    type: string
+                  key:
+                    type: string
                   value:
-                    id: 12
-                    firstName: Bob
-                    lastName: Fellow
-                    email: bob.fellow@gmail.com
-                    dateOfBirth: '1996-08-24'
-                    emailVerified: false
-                    createDate: '2020-11-18'
-        '400':
-          description: Missing Required Information
-        '409':
-          description: Email Already Taken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-                email:
-                  type: string
-                dateOfBirth:
-                  type: string
-                  format: date
-              required:
-                - firstName
-                - lastName
-                - email
-                - dateOfBirth
-            examples:
-              Create User Bob Fellow:
-                value:
-                  firstName: Bob
-                  lastName: Fellow
-                  email: bob.fellow@gmail.com
-                  dateOfBirth: '1996-08-24'
-        description: Post the necessary fields for the API to create a new user.
-      description: Create a new user.
+                    type: string
+                  blob_flg:
+                    type: string
+                  up_dt:
+                    type: string
+                  rg_dt:
+                    type: string
+                  version:
+                    type: integer
+                  format_type:
+                    type: integer
+                  viewable_flg:
+                    type: boolean
+                  sort_order:
+                    type: integer
+                required:
+                  - node_id
+                  - prent_node_id
+                  - key
+                  - value
+                  - blob_flg
+                  - up_dt
+                  - rg_dt
+                  - version
+      operationId: get-cms-node
+      description: 指定ノードの詳細情報を取得する
+    parameters:
+      - schema:
+          type: string
+        name: node_id
+        in: path
+        required: true
+        description: ノードID
+    put:
+      summary: ノード更新
+      operationId: put-cms-node-node_id
+      responses:
+        '204':
+          description: No Content
+      description: 指定ノードを更新する。
 components:
   schemas:
     User:
